@@ -36,10 +36,10 @@ if ($count === 0){
     }
 }
 
-$sqlCount = "SELECT COUNT(*) FROM ($sqlAlunos) AS total";
+$sqlCount = "SELECT COUNT(*) FROM aluno JOIN status ON aluno.idStatus = status.id";
 $stmtCount = $pdo->prepare($sqlCount);
 $stmtCount->execute();
-$totalRegistros = $stmtCount -> fetchColumn();
+$totalRegistros = $stmtCount->fetchColumn();
 
 $totalPaginas = ceil($totalRegistros / $pageSize);
 
@@ -69,7 +69,7 @@ if ($page < $totalPaginas - 3){
 }
 
 if ($totalPaginas > 1 && $page != $totalPaginas){
-    echo "<a href='#' data-page='$totalPaginas'>$totalPaginas>";
+    echo "<a href='#' data-page='$totalPaginas'>$totalPaginas</a>";
 }
 
 echo "</div>";
